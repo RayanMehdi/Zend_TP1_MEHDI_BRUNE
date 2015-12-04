@@ -10,7 +10,7 @@ return array(
     'modules' => array(
         'Application',
         'Album',                  // <-- Add this line
-        
+        'SanAuth'
         
     ),
 

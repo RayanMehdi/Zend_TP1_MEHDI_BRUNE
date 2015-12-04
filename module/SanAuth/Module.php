@@ -1,5 +1,6 @@
 <?php
-//module/SanAuth/Module.php
+
+
 namespace SanAuth;
  
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -7,9 +8,18 @@ use Zend\Authentication\Storage;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
  
-class Module implements AutoloaderProviderInterface
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
-    public function getAutoloaderConfig(){/*common code*/}
+    public function getAutoloaderConfig(){ return array(
+             'Zend\Loader\ClassMapAutoloader' => array(
+                 __DIR__ . '/autoload_classmap.php',
+             ),
+             'Zend\Loader\StandardAutoloader' => array(
+                 'namespaces' => array(
+                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                 ),
+             ),
+         );}
     public function getConfig(){ /*common code*/}
      
     public function getServiceConfig()
@@ -37,7 +47,8 @@ class Module implements AutoloaderProviderInterface
             ),
         );
     }
- 
+
+    
 }
 /* 
  * To change this license header, choose License Headers in Project Properties.
